@@ -71,7 +71,31 @@ async function getChessData() {
       winRate
     });
   }
+function displayEloRankings(data) {
+  const table = document.getElementById("eloTable");
 
+  data.sort((a, b) => {
+    const ratingA = typeof a.rapid === "number" ? a.rapid : 0;
+    const ratingB = typeof b.rapid === "number" ? b.rapid : 0;
+    return ratingB - ratingA;
+  });
+
+  table.innerHTML = "";
+
+  data.forEach((player, index) => {
+    table.innerHTML += `
+      <tr>
+        <td>${index + 1}</td>
+        <td>${player.flag}</td>
+        <td>${player.name}</td>
+        <td>${player.username}</td>
+        <td>${player.rapid}</td>
+        <td>${player.blitz}</td>
+        <td>${player.bullet}</td>
+      </tr>
+    `;
+  });
+}
   displayEloRankings(playerData);
   displayRecordRankings(playerData);
 }
