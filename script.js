@@ -37,22 +37,42 @@ async function getChessData() {
 
   for (let player of players) {
 
-    const response = await fetch(`https://api.chess.com/pub/player/${player.username}/stats`);
+    const response = await fetch(
+      `https://api.chess.com/pub/player/${player.username}/stats`
+    );
+
     const data = await response.json();
 
     const rapid = data.chess_rapid?.last?.rating || "N/A";
     const blitz = data.chess_blitz?.last?.rating || "N/A";
     const bullet = data.chess_bullet?.last?.rating || "N/A";
 
-    const rapidRecord = data.chess_rapid?.record || { win: 0, loss: 0, draw: 0 };
-    const blitzRecord = data.chess_blitz?.record || { win: 0, loss: 0, draw: 0 };
-    const bulletRecord = data.chess_bullet?.record || { win: 0, loss: 0, draw: 0 };
+    const rapidRecord =
+      data.chess_rapid?.record || { win: 0, loss: 0, draw: 0 };
 
-    const wins = rapidRecord.win + blitzRecord.win + bulletRecord.win;
-    const losses = rapidRecord.loss + blitzRecord.loss + bulletRecord.loss;
-    const draws = rapidRecord.draw + blitzRecord.draw + bulletRecord.draw;
+    const blitzRecord =
+      data.chess_blitz?.record || { win: 0, loss: 0, draw: 0 };
+
+    const bulletRecord =
+      data.chess_bullet?.record || { win: 0, loss: 0, draw: 0 };
+
+    const wins =
+      rapidRecord.win +
+      blitzRecord.win +
+      bulletRecord.win;
+
+    const losses =
+      rapidRecord.loss +
+      blitzRecord.loss +
+      bulletRecord.loss;
+
+    const draws =
+      rapidRecord.draw +
+      blitzRecord.draw +
+      bulletRecord.draw;
 
     const totalGames = wins + losses + draws;
+
     const winRate =
       totalGames > 0
         ? ((wins / totalGames) * 100).toFixed(1) + "%"
@@ -71,12 +91,18 @@ async function getChessData() {
       winRate
     });
   }
+
+  displayEloRankings(playerData);
+  displayRecordRankings(playerData);
+}
+
 function displayEloRankings(data) {
   const table = document.getElementById("eloTable");
 
   data.sort((a, b) => {
     const ratingA = typeof a.rapid === "number" ? a.rapid : 0;
     const ratingB = typeof b.rapid === "number" ? b.rapid : 0;
+
     return ratingB - ratingA;
   });
 
@@ -95,9 +121,6 @@ function displayEloRankings(data) {
       </tr>
     `;
   });
-}
-  displayEloRankings(playerData);
-  displayRecordRankings(playerData);
 }
 
 function displayRecordRankings(data) {
@@ -126,7 +149,10 @@ function displayTournamentRankings() {
   const table = document.getElementById("tournamentTable");
 
   tournamentData.forEach(player => {
-    player.points = player.first * 5 + player.second * 3 + player.third;
+    player.points =
+      player.first * 5 +
+      player.second * 3 +
+      player.third;
   });
 
   tournamentData.sort((a, b) => b.points - a.points);
