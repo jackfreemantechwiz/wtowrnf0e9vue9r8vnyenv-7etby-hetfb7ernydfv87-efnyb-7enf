@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Westtown Chess Club</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="overlay">
+    <h1>Westtown Chess Club</h1>
+    <p>Live Chess.com rankings, records, flags, and tournament standings</p>
+  </div>
+</header>
+<nav>
+  <button onclick="showTab('home')">Home</button>
+  <button onclick="showTab('elo')">ELO Rankings</button>
+  <button onclick="showTab('record')">Record Rankings</button>
+  <button onclick="showTab('tournaments')">Tournament Points</button>
+</nav>
+<main>
+  <section id="home" class="tab active">
+    <h2>Welcome</h2>
+    <div class="card">
+      <p>
+        This site helps run the Westtown Chess Club by tracking Chess.com ratings,
+        records, win rates, country flags, and in-person tournament points.
+      </p>
+    </div>
+    <div class="card">
+      <h3>Tournament Point System</h3>
+      <p>1st place = 5 points</p>
+      <p>2nd place = 3 points</p>
+      <p>3rd place = 1 point</p>
+    </div>
+  </section>
+  <section id="elo" class="tab">
+    <h2>Chess.com ELO Rankings</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Flag</th>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Rapid</th>
+          <th>Blitz</th>
+          <th>Bullet</th>
+        </tr>
+      </thead>
+      <tbody id="eloTable"></tbody>
+    </table>
+  </section>
+  <section id="record" class="tab">
+    <h2>Record Rankings</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Flag</th>
+          <th>Name</th>
+          <th>Wins</th>
+          <th>Losses</th>
+          <th>Draws</th>
+          <th>Win Rate</th>
+        </tr>
+      </thead>
+      <tbody id="recordTable"></tbody>
+    </table>
+  </section>
+  <section id="tournaments" class="tab">
+    <h2>In-Person Tournament Points</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Name</th>
+          <th>1st Place</th>
+          <th>2nd Place</th>
+          <th>3rd Place</th>
+          <th>Total Points</th>
+        </tr>
+      </thead>
+      <tbody id="tournamentTable"></tbody>
+    </table>
+  </section>
+</main>
+<footer>
+  <p>Westtown Chess Club © 2026</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
