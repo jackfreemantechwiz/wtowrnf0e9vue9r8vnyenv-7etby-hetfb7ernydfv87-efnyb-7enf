@@ -67,26 +67,11 @@ async function getChessData() {
         draws,
         winRate
       });
-
-    } catch (error) {
-      playerData.push({
-        name: player.name,
-        username: player.username,
-        flag: player.flag,
-        rapid: "Error",
-        blitz: "Error",
-        bullet: "Error",
-        wins: 0,
-        losses: 0,
-        draws: 0,
-        winRate: "Error"
-      });
     }
-  }
 
-  displayEloRankings(playerData);
-  displayRecordRankings(playerData);
-}
+    displayEloRankings(playerData);
+    displayRecordRankings(playerData);
+  }
 
 function displayEloRankings(data) {
   const table = document.getElementById("eloTable");
